@@ -35,4 +35,5 @@ void I_BUS_process(I_BUS *ibus, uint8_t *uart_buf, uint8_t *ibus_flag){
 		ibus->ch_proc[i] = (uart_buf[2*i+1] << 8) + uart_buf[2];
 	}
 	*ibus_flag = 0;
+	
 }
