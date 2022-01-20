@@ -1,5 +1,5 @@
 #ifndef I_BUS_H
-#define IBUS_H
+#define I_BUS_H
 
 #include "main.h"
 
@@ -10,7 +10,6 @@
 -------- */
 
 #define CH_NUM						6
-#define STORAGE_SIZE				780
 
 
 
@@ -20,8 +19,11 @@
 
 -------- */
 
-typedef struct I_BUS_struct{
+typedef struct {
+	uint8_t ch_raw[32];
 	uint16_t ch_proc[14];
+	uint8_t flag;
+	UART_HandleTypeDef *uart_Handle;
 } I_BUS;
 
 
@@ -32,11 +34,14 @@ typedef struct I_BUS_struct{
 	
 -------- */
 
-void I_BUS_initialize(uint8_t *ibus, UART_HandleTypeDef *huart);
+void I_BUS_initialize(I_BUS *input, UART_HandleTypeDef *huart);
 
-void I_BUS_process(I_BUS *ibus, uint8_t *uart_buf, uint8_t *ibus_flag);
+void I_BUS_process(I_BUS *input);
+
+void I_BUS_data_receive(I_BUS *input);
 
 
 
 
 #endif
+
